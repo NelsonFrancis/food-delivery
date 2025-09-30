@@ -1,16 +1,23 @@
 import express from "express"
 import cors from 'cors'
+import dotenv from 'dotenv'
+import {connectDB} from './config/db.js'
+
+dotenv.config({
+    path: './.env'
+})
 
 const app = express();
-const port = 4000;
 
 app.use(express.json());
 app.use(cors());
+
+connectDB();
 
 app.get("/", (req, res) => {
     res.send("API working")
 })
 
-app.listen(port,() => {
-    console.log(`Server started on port ${port}`)
+app.listen(process.env.PORT,() => {
+    console.log(`Server started on port ${process.env.PORT}`)
 })
