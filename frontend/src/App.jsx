@@ -6,12 +6,26 @@ import PlaceOrder from './pages/PlaceOrder'
 import Footer from './components/Footer'
 import { useState } from 'react'
 import LoginPopup from './components/LoginPopup'
+import { ToastContainer, Slide } from 'react-toastify'
 
 function App() {
   const [showLogin, setShowLogin] = useState(false)
 
   return (
     <>
+      <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition={Slide}
+      />
       {showLogin ? <LoginPopup setShowLogin={setShowLogin}/> : <></>}
       <div className='app'>
         <Navbar setShowLogin={setShowLogin} />
