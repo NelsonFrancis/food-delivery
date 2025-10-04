@@ -8,7 +8,7 @@ const FoodItem = ({id, name, price, desc, img}) => {
   return (
     <div className='food-item'>
         <div className="food-item-img-container">
-            <img src={img} alt="img" className="food-item-image" />
+            <img src={`${import.meta.env.VITE_URL}/images/${img}`} alt="img" className="food-item-image" />
             {
                 !cartItem[id]
                 ? <img src={assets.add_icon_white} className='add' onClick={() => addToCart(id)} alt='img' />
