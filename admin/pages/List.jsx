@@ -39,7 +39,7 @@ const List = () => {
           <b>Price</b>
           <b>Action</b>
         </div>
-        {
+        {listItems.length === 0 ? <div className="list-table-format"><p>No items added</p> </div>:
           listItems.map((item, index) => {
             return(
               <div key={index} className="list-table-format">
