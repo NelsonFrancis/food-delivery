@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 const verifyUser = async (req, res, next) => {
+    console.log("req===", req.body);
     const {token} = req.headers;
     if(!token){
         return res.json({success: false, message: "User not authorized"});
