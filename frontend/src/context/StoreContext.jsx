@@ -15,16 +15,20 @@ const StoreContextProvider = (props) => {
         console.log("res = ", res.data.data)
     }
 
-    const addToCart = (itemId) => {
+    const addToCart = async (itemId) => {
         if(!cartItem[itemId]){
             setCartItem(prev => ({...prev, [itemId]: 1}))
         }else{
             setCartItem(prev => ({...prev, [itemId]: prev[itemId] + 1}))
         }
+        if(token){
+            await axios.post(`${import.meta.env.VITE_URL}/api/cart/addToCart`, {item: itemId}, {headers: {token}})
+        }
     }
 
-    const removeFromCart = (itemId) => {
-        setCartItem(prev => ({...prev, [itemId]: prev[itemId] - 1}))
+    const removeFromCart = async (itemId) => {
+        setCartItem(prev => ({...prev, [itemId]: prev[itemId] - 1}));
+        await axios.post(`${import.meta.env.VITE_URL}/api/cart/removeFromCart`, {item: itemId}, {headers: {token}})
     }
 
     const getTotalCartAmount = () => {
@@ -33,14 +37,22 @@ const StoreContextProvider = (props) => {
             if(cartItem[item] > 0){
                 let itemInfo = foodList.find((product) => product._id === item);
                 totalAmount += itemInfo.price * cartItem[item];
+                console.log("itemInfo", itemInfo.price)
+                console.log("cartItem", cartItem)
             }
         }
         return totalAmount
     }
 
+    const getCartItems = async(token) => {
+        const res = await axios.post(`${import.meta.env.VITE_URL}/api/cart/getCartItems`, {}, {headers: {token}});
+        setCartItem(res.data.cartData);
+    }
+
     useEffect(()=>{
         if(localStorage.getItem("token")){
-            setToken(localStorage.getItem("token"))
+            setToken(localStorage.getItem("token"));
+            getCartItems(localStorage.getItem("token"));
         }
         fetchFoodList();
     },[])

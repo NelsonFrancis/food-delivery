@@ -27,8 +27,8 @@ const Cart = () => {
             {foodList.map((item, index) => {
               if(cartItem[item._id]>0){
                 return(
-                  <>
-                    <div key={index} className="cart-items-title cart-items-item">
+                  <div key={index}>
+                    <div className="cart-items-title cart-items-item">
                       <img src={`${import.meta.env.VITE_URL}/images/${item.image}`} alt='img' />
                       <p>{item.name}</p>
                       <p>${item.price}</p>
@@ -37,7 +37,7 @@ const Cart = () => {
                       <p onClick={() => removeFromCart(item._id)} className='cross'>x</p>
                     </div>
                     <hr />
-                  </>
+                  </div>
                 )
               }
             })}
