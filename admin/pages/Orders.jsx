@@ -18,6 +18,21 @@ const Orders = () => {
     }
   }
 
+  const statusHandler = async (e, orderId) => {
+    console.log(orderId)
+    const res = await axios.post(`${import.meta.env.VITE_URL}/api/order/updateStatus`, {
+      orderId,
+      status: e.target.value
+    })
+    console.log(res)
+    if(res.data.success){
+      await fetchData();
+    }else{
+      console.log("Error in updating status");
+      toast.error("Error in updating status");
+    }
+  }
+
   useEffect(() => {
     fetchData();
   },[])
@@ -51,11 +66,11 @@ const Orders = () => {
                 <p>Items: {order.items.length}</p>
                 <p>Amount: ${order.amount}</p>
               </div>
-              <select>
-                  <option value="Food processing">Food processing</option>
-                  <option value="Out for delivery">Out for delivery</option>
-                  <option value="Delivered">Delivered</option>
-                </select>
+              <select onChange={(event) => statusHandler(event, order._id)} value={order.status}>
+                <option value="Food processing">Food processing</option>
+                <option value="Out for delivery">Out for delivery</option>
+                <option value="Delivered">Delivered</option>
+              </select>
            </div> 
           ))
         }
