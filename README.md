@@ -1,0 +1,1 @@
+A full-stack food delivery web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js). The platform allows users to browse food items, add them to their cart, and place orders securely using Stripe payments. It features JWT-based authentication for users and an admin panel for managing menu items, orders, and users.
