@@ -7,7 +7,6 @@ const placeOrder = async (req, res) => {
 
     try {
         const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-        console.log("Stripe key loaded:", process.env.STRIPE_SECRET_KEY);
 
         const newOrder = new orderModel({
             userId, items, amount, address

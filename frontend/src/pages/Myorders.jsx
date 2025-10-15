@@ -1,17 +1,14 @@
-import React from 'react'
 import { useContext } from 'react'
 import { StoreContext } from '../context/StoreContext'
 import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { assets } from '../assets/assets';
-import { useNavigate } from 'react-router-dom';
 
 const Myorders = () => {
     const {token} = useContext(StoreContext);
     const [data, setData] = useState([]);
   
-
     const fetchOrders = async () => {
         const res = await axios.post(`${import.meta.env.VITE_URL}/api/order/userOrders`, {}, {headers: {token}});
         setData(res.data.data);

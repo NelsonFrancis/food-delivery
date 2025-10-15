@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 import axios from 'axios';
-// import { food_list } from "../assets/assets";
 
 export const StoreContext = createContext(null)
 
@@ -12,7 +11,6 @@ const StoreContextProvider = (props) => {
     const fetchFoodList = async() => {
         const res = await axios.get(`${import.meta.env.VITE_URL}/api/food/allFoods`)
         setFoodList(res.data.data);
-        console.log("res = ", res.data.data)
     }
 
     const addToCart = async (itemId) => {
@@ -37,8 +35,6 @@ const StoreContextProvider = (props) => {
             if(cartItem[item] > 0){
                 let itemInfo = foodList.find((product) => product._id === item);
                 totalAmount += itemInfo.price * cartItem[item];
-                console.log("itemInfo", itemInfo.price)
-                console.log("cartItem", cartItem)
             }
         }
         return totalAmount

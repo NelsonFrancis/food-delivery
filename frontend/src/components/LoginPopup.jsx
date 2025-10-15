@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { assets } from '../assets/assets';
 import { toast } from 'react-toastify'
 import { StoreContext } from '../context/StoreContext';
@@ -17,7 +17,6 @@ const LoginPopup = ({setShowLogin}) => {
     const onChangeHandler = (e) => {
         const name = e.target.name;
         const value = e.target.value;
-
         setData(data => ({...data, [name]: value}))
     }
 
@@ -56,9 +55,12 @@ const LoginPopup = ({setShowLogin}) => {
     
   return (
     <>
-         {loader && <div className="loader_wrap">
-            <img src={assets.loader} className='loader' alt='loading'/>     
-        </div>}
+        {
+            loader && 
+            <div className="loader_wrap">
+                <img src={assets.loader} className='loader' alt='loading'/>     
+            </div>
+        }
   
         <div className='login-popup'>
             <form className="login-popup-container" onSubmit={onLogin}>
@@ -81,7 +83,6 @@ const LoginPopup = ({setShowLogin}) => {
                     ? <p>Create a new account? <span onClick={() => setCurrentState("Sign up")}>Click here</span> </p> 
                     : <p>Already have account? <span onClick={() => setCurrentState("Login")}>Login here</span> </p>
                 }
-                
             </form>
         </div>
     </>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 import { useEffect } from 'react';
 import axios from 'axios';
 import {toast} from 'react-toastify';
@@ -11,24 +11,19 @@ const Orders = () => {
     const res = await axios.get(`${import.meta.env.VITE_URL}/api/order/getAllOrders`);
     if(res.data.success){
       setData(res.data.data);
-      console.log(res.data);
     }else{
-      console.log("Error in fetching orders",res.data.message);
       toast.error("Error in fetching orders");
     }
   }
 
   const statusHandler = async (e, orderId) => {
-    console.log(orderId)
     const res = await axios.post(`${import.meta.env.VITE_URL}/api/order/updateStatus`, {
       orderId,
       status: e.target.value
     })
-    console.log(res)
     if(res.data.success){
       await fetchData();
     }else{
-      console.log("Error in updating status");
       toast.error("Error in updating status");
     }
   }

@@ -44,10 +44,8 @@ const Add = () => {
             });
             setImage(false);
             setLoading(false);
-            console.log(res.data);
             toast.success('Food added!!!');
         }else{
-            console.log(res);
             toast.error('Something went wrong!!!');
             setLoading(false);
         }
@@ -56,9 +54,12 @@ const Add = () => {
 
   return (
     <>
-        {loading && <div className="loader_wrap">
-            <img src={assets.loader} className='loader' alt='loading'/>     
-        </div>}
+        {
+            loading && 
+            <div className="loader_wrap">
+                <img src={assets.loader} className='loader' alt='loading'/>     
+            </div>
+        }
         <div className='add'>  
             <form className='flex-col' onSubmit={onSubmitHandler}>
                 <div className="add-img-upload flex-col">
