@@ -7,9 +7,10 @@ const Verify = () => {
     const success = searchParams.get("success");
     const orderId = searchParams.get("orderId");
     const navigate = useNavigate();
-
+    console.log("verify loaded");
     const verifyPayment = async () => {
         const res = await axios.post(`${import.meta.env.VITE_URL}/api/order/verify`, {success, orderId});
+        console.log(res.data);
         if(res.data.success){
             navigate("/myorders")
         }else{
